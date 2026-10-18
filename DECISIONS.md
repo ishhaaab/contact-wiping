@@ -12,6 +12,7 @@ Source specification: `../../docs/superpowers/specs/2026-10-18-project-specifica
 5. Ruling: use CPU PyTorch and four CPU simulation environments for the small MLP. The GPU is available but the installed CPU build does not use it. Cost if wrong: longer training; throughput will be measured before long runs. Algorithm and network sizes are unchanged.
 6. Ruling: the controller uses `SeedSequence(episode_seed, spawn_key=(1,))`, separate from the environment's episode-seeded generator. Reusing the same stream produced a measured radius/normal-offset correlation of 1.0. The regression failed before this fix. Uniform offset and Gaussian noise distributions, episode seeds, physics, and all splits stay as specified. Cost if wrong: regenerate demonstrations. Pre-fix artifacts are retained under `artifacts/diagnostics/pre-rng-fix` and are excluded from training and reported smoke evidence.
 7. Ruling: interpolate the raster's surface waypoints at no more than 4 mm before applying the prescribed radial tool-centre formula. Advancing waypoints uses a 1.2 mm target-distance tolerance to accommodate action noise. A single endpoint-height interpolation would cut through a curved cap. Cost if wrong: different scripted coverage; controller discretization is recorded and shared by demonstrations and baseline evaluation.
+8. Ruling: implement the basic seeded evaluator during Task 4 because validation checkpoint selection consumes it. Task 5 adds aggregation, plots, videos, and the unified CLI. Cost if wrong: module ordering only. Validation uses exactly seeds 1000..1019; smoke never reads the final-test suite.
 
 ## Pre-flight interface checks
 
@@ -39,7 +40,7 @@ No unresolved pre-implementation blocker. Physics and demonstration quality are 
 - [x] Task 1: contact physics, static load, 10,000 substeps, frame, dependency lock.
 - [x] Task 2: environment, coverage, reward, safety, reproducibility, SB3 check. Twenty scripted episodes follow in Task 3.
 - [x] Task 3 software and smoke: scripted demonstrations, HDF5 split, controller quality gate. Full 200-episode collection follows the smoke pipeline.
-- [ ] Task 4: BC, PPO, transfer, smoke training, throughput estimate.
+- [x] Task 4: BC, PPO, transfer, smoke training, throughput estimate.
 - [ ] Task 5: evaluation, reporting, videos, CLI, clean-install verification.
 - [ ] Final whole-repository review and handoff.
 
@@ -53,4 +54,10 @@ Task 3: five RED dataset/controller tests and the RNG-stream regression failed b
 
 Task 2's deferred twenty scripted episodes also ran after the RNG fix: seeds 3010..3029, 8000 transitions, mean coverage 0.497265625, qualifying fraction 0.75, zero task successes, zero physical failures, all timeouts. Raw per-episode results are `reports/smoke/scripted-20.json`. This diagnostic took 14.5311 seconds. It is separate from learning performance and final evaluation.
 
-No training experiments run yet. No physical-robot validation.
+Task 4: five learning/evaluation tests failed before implementation. Full suite passed 37/37 and Ruff passed. Tiny-fixture BC reduced action MSE by more than 50% without modifying critic tensors; transfer preserved deterministic actions to 1e-6; a real four-environment PPO update changed actor weights and retained finite critic parameters.
+
+Seed-11 smoke training completed for BC, PPO, and BC+PPO under `runs/smoke/{method}/11/`. Both RL methods used exactly 8192 transitions. Every learned method evaluated all 20 validation seeds. Mean validation coverage: BC 0.05078125, PPO 0.0, BC+PPO 0.096875. All three had zero successes. These are smoke checks, not full experimental results. A separate tensor comparison confirmed the independently fitted BC and BC+PPO initialization checkpoints are exactly equal.
+
+Measured throughput excluding validation: PPO 506.0400 transitions/s, BC+PPO 444.0391 transitions/s. Full PPO rounds to 2,002,944 transitions per run. Extrapolating three seeds per RL method and 41 validation rounds per run gives about 8.116 hours for six RL runs including validation, before BC fitting, full data collection, final evaluation, and videos. No long run has been launched. Timing is host-specific; the initial test suite ran concurrently with part of the BC smoke stage.
+
+No physical-robot validation.
