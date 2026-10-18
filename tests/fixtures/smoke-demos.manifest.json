@@ -1,0 +1,50 @@
+{
+  "episodes": 2,
+  "transitions": 800,
+  "seeds": [
+    3000,
+    3006
+  ],
+  "train_seeds": [
+    3000
+  ],
+  "validation_seeds": [
+    3006
+  ],
+  "qualifying_fraction": 0.5,
+  "mean_coverage": 0.443359375,
+  "success_fraction": 0.0,
+  "physical_failure_fraction": 0.0,
+  "unsuccessful_fraction": 1.0,
+  "episode_results": [
+    {
+      "seed": 3000,
+      "split": "train",
+      "steps": 400,
+      "coverage": 0.23046875,
+      "success": false,
+      "failure_reason": null,
+      "terminated": false,
+      "truncated": true,
+      "normal_offset_m": 0.0021266024169189542
+    },
+    {
+      "seed": 3006,
+      "split": "validation",
+      "steps": 400,
+      "coverage": 0.65625,
+      "success": false,
+      "failure_reason": null,
+      "terminated": false,
+      "truncated": true,
+      "normal_offset_m": 0.0016287771189707782
+    }
+  ],
+  "schema_version": 1,
+  "generation_config": {
+    "profile": "smoke_fixture",
+    "source": "imperfect_scripted_raster",
+    "origin": "data/smoke/demos.h5"
+  },
+  "sha256": "68b48924af5ae1ac31741f33fdb51479bd178d0ef0927480bc4f6facc7859be2"
+}
