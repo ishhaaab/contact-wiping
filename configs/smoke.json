@@ -1,0 +1,8 @@
+{
+  "profile": "smoke",
+  "seed": 11,
+  "demo_episodes": 8,
+  "total_steps": 8192,
+  "dataset": "data/smoke/demos.h5",
+  "env": {"max_steps": 400}
+}

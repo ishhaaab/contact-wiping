@@ -1,0 +1,8 @@
+{
+  "profile": "pilot",
+  "seed": 11,
+  "demo_episodes": 40,
+  "total_steps": 200000,
+  "dataset": "data/pilot/demos.h5",
+  "env": {"max_steps": 400}
+}

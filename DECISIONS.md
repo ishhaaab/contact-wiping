@@ -35,7 +35,7 @@ No unresolved pre-implementation blocker. Physics and demonstration quality are 
 ## Task status
 
 - [x] Task 1: contact physics, static load, 10,000 substeps, frame, dependency lock.
-- [ ] Task 2: environment, coverage, reward, safety, reproducibility, SB3 check.
+- [x] Task 2: environment, coverage, reward, safety, reproducibility, SB3 check. Twenty scripted episodes follow in Task 3.
 - [ ] Task 3: scripted demonstrations, HDF5 split, controller quality gate.
 - [ ] Task 4: BC, PPO, transfer, smoke training, throughput estimate.
 - [ ] Task 5: evaluation, reporting, videos, CLI, clean-install verification.
@@ -44,5 +44,7 @@ No unresolved pre-implementation blocker. Physics and demonstration quality are 
 ## Experimental status
 
 Task 1: seven intended RED failures before model implementation, then seven passing tests. The trace/render test failed before its implementation, then the suite passed 8/8. `ruff check .` passes. Physics details and exact reproduction commands are in `reports/physics-gate.md`; exact dependency versions are in `requirements-lock.txt`.
+
+Task 2: 18 RED failures before implementation, then the full suite passed 26/26 including SB3 `check_env`. Verified exact observation order, reproducibility, contact-gated coverage, reset, clipped actions, reward arithmetic, excessive-force counting across control boundaries, timeout distinction, success bonus, and invalid-state handling before MuJoCo can silently reset it. Profiles preserve the specified budgets. Raw nonfinite state remains visible on a failed transition; training must stop on it. Rendering uses forward kinematics and never changes targets or steps physics.
 
 No training experiments run yet. No physical-robot validation.
