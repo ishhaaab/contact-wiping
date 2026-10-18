@@ -9,6 +9,7 @@ Source specification: `../../docs/superpowers/specs/2026-10-18-project-specifica
 2. Ruling: run the feasibility gate on native Windows 11 using available CPython 3.11.17. WSL reports no installed distributions. Linux remains the reference platform; native compatibility must be demonstrated, not assumed. Cost if wrong: stop the gate and arrange the reference environment. No simulator or experiment change is authorized by this decision.
 3. Ruling: the eight-episode smoke and forty-episode pilot profiles override the full dataset's 200 episodes. Preserve the 80/20 episode-level split using the first floor(0.8*N) for training and the rest for BC validation, with seeds starting at 3000. Full remains exactly 160/40 and 3000..3199. Cost if wrong: regenerate smoke/pilot data; full protocol is unaffected.
 4. Ruling: Task 2's twenty scripted episodes run after Task 3 implements the controller, as the plan explicitly requires. Task 3's full dataset and Task 5's full comparison are experimental-release work after the smoke pipeline and compute estimate. Cost if wrong: additional full runs before an experimental release; smoke must never be labelled full evidence.
+5. Ruling: use CPU PyTorch and four CPU simulation environments for the small MLP. The GPU is available but the installed CPU build does not use it. Cost if wrong: longer training; throughput will be measured before long runs. Algorithm and network sizes are unchanged.
 
 ## Pre-flight interface checks
 
@@ -33,7 +34,7 @@ No unresolved pre-implementation blocker. Physics and demonstration quality are 
 
 ## Task status
 
-- [ ] Task 1: contact physics, static load, 10,000 substeps, frame, dependency lock.
+- [x] Task 1: contact physics, static load, 10,000 substeps, frame, dependency lock.
 - [ ] Task 2: environment, coverage, reward, safety, reproducibility, SB3 check.
 - [ ] Task 3: scripted demonstrations, HDF5 split, controller quality gate.
 - [ ] Task 4: BC, PPO, transfer, smoke training, throughput estimate.
@@ -42,4 +43,6 @@ No unresolved pre-implementation blocker. Physics and demonstration quality are 
 
 ## Experimental status
 
-No experiments run yet. No physical-robot validation.
+Task 1: seven intended RED failures before model implementation, then seven passing tests. The trace/render test failed before its implementation, then the suite passed 8/8. `ruff check .` passes. Physics details and exact reproduction commands are in `reports/physics-gate.md`; exact dependency versions are in `requirements-lock.txt`.
+
+No training experiments run yet. No physical-robot validation.
