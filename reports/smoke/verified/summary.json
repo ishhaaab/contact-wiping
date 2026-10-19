@@ -1,0 +1,797 @@
+{
+  "episodes": 36,
+  "groups": [
+    {
+      "profile": "smoke",
+      "suite": "curvature",
+      "method": "bc",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 1,
+      "training_seeds": [
+        11
+      ],
+      "per_training_seed": [
+        {
+          "training_seed": 11,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.032552083333333336,
+          "force_mean_n": 10.12136992399211,
+          "force_max_n": 13.23519613568415,
+          "unsafe_fraction": 0.9058666666666667,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.032552083333333336,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 10.12136992399211,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 13.23519613568415,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.9058666666666667,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "curvature",
+      "method": "bc_ppo",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 1,
+      "training_seeds": [
+        11
+      ],
+      "per_training_seed": [
+        {
+          "training_seed": 11,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.09635416666666667,
+          "force_mean_n": 2.349070546139067,
+          "force_max_n": 11.54377290785996,
+          "unsafe_fraction": 0.1561,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.09635416666666667,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 2.349070546139067,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 11.54377290785996,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.1561,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "curvature",
+      "method": "ppo",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 1,
+      "training_seeds": [
+        11
+      ],
+      "per_training_seed": [
+        {
+          "training_seed": 11,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.0,
+          "force_mean_n": 0.0,
+          "force_max_n": 0.0,
+          "unsafe_fraction": 0.0,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "curvature",
+      "method": "scripted",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 0,
+      "training_seeds": [],
+      "per_training_seed": [
+        {
+          "training_seed": null,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.6822916666666666,
+          "force_mean_n": 0.5228889274087524,
+          "force_max_n": 2.428096079235246,
+          "unsafe_fraction": 0.0,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.6822916666666666,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 0.5228889274087524,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 2.428096079235246,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "friction",
+      "method": "bc",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 1,
+      "training_seeds": [
+        11
+      ],
+      "per_training_seed": [
+        {
+          "training_seed": 11,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.04296875,
+          "force_mean_n": 10.203461051608569,
+          "force_max_n": 14.534196292996405,
+          "unsafe_fraction": 0.9108333333333333,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.04296875,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 10.203461051608569,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 14.534196292996405,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.9108333333333333,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "friction",
+      "method": "bc_ppo",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 1,
+      "training_seeds": [
+        11
+      ],
+      "per_training_seed": [
+        {
+          "training_seed": 11,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.06901041666666667,
+          "force_mean_n": 4.774099137144964,
+          "force_max_n": 12.810914016516387,
+          "unsafe_fraction": 0.3133333333333333,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.06901041666666667,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 4.774099137144964,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 12.810914016516387,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.3133333333333333,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "friction",
+      "method": "ppo",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 1,
+      "training_seeds": [
+        11
+      ],
+      "per_training_seed": [
+        {
+          "training_seed": 11,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.0,
+          "force_mean_n": 0.0,
+          "force_max_n": 0.0,
+          "unsafe_fraction": 0.0,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "friction",
+      "method": "scripted",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 0,
+      "training_seeds": [],
+      "per_training_seed": [
+        {
+          "training_seed": null,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.6705729166666666,
+          "force_mean_n": 0.5252390595215036,
+          "force_max_n": 2.34094281546677,
+          "unsafe_fraction": 0.0,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.6705729166666666,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 0.5252390595215036,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 2.34094281546677,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "id",
+      "method": "bc",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 1,
+      "training_seeds": [
+        11
+      ],
+      "per_training_seed": [
+        {
+          "training_seed": 11,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.053385416666666664,
+          "force_mean_n": 7.5091768099498415,
+          "force_max_n": 13.39563369498525,
+          "unsafe_fraction": 0.6462666666666667,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.053385416666666664,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 7.5091768099498415,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 13.39563369498525,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.6462666666666667,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "id",
+      "method": "bc_ppo",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 1,
+      "training_seeds": [
+        11
+      ],
+      "per_training_seed": [
+        {
+          "training_seed": 11,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.10286458333333333,
+          "force_mean_n": 7.47819114034917,
+          "force_max_n": 12.47395526387195,
+          "unsafe_fraction": 0.6596666666666667,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.10286458333333333,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 7.47819114034917,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 12.47395526387195,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.6596666666666667,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "id",
+      "method": "ppo",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 1,
+      "training_seeds": [
+        11
+      ],
+      "per_training_seed": [
+        {
+          "training_seed": 11,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.0,
+          "force_mean_n": 0.0,
+          "force_max_n": 0.0,
+          "unsafe_fraction": 0.0,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    },
+    {
+      "profile": "smoke",
+      "suite": "id",
+      "method": "scripted",
+      "episodes": 3,
+      "paired_case_count": 3,
+      "n_training_seeds": 0,
+      "training_seeds": [],
+      "per_training_seed": [
+        {
+          "training_seed": null,
+          "episodes": 3,
+          "evaluation_seeds": [
+            1000,
+            1001,
+            1002
+          ],
+          "coverage": 0.6692708333333334,
+          "force_mean_n": 0.5217997502870583,
+          "force_max_n": 2.4205623650057198,
+          "unsafe_fraction": 0.0,
+          "elapsed_s": 20.0,
+          "success_rate": 0.0,
+          "completion_time_s": null
+        }
+      ],
+      "metrics": {
+        "coverage": {
+          "mean": 0.6692708333333334,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_mean_n": {
+          "mean": 0.5217997502870583,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "force_max_n": {
+          "mean": 2.4205623650057198,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "unsafe_fraction": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "elapsed_s": {
+          "mean": 20.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "success_rate": {
+          "mean": 0.0,
+          "std_across_seeds": null,
+          "contributing_models": 1
+        },
+        "completion_time_s": {
+          "mean": null,
+          "std_across_seeds": null,
+          "contributing_models": 0
+        }
+      }
+    }
+  ],
+  "notes": [
+    "All episodes, including failures, contribute to coverage and success.",
+    "Force means include non-contact substeps.",
+    "Completion time is conditional on success; null means no successes.",
+    "Across-seed SD is sample SD; null for fewer than two models."
+  ]
+}

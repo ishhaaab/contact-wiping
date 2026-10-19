@@ -1,0 +1,174 @@
+{
+  "python": "3.11.17 (main, Oct 14 2026, 01:04:22) [MSC v.1944 64 bit (AMD64)]",
+  "all_pins_match": true,
+  "packages": {
+    "absl-py": {
+      "expected": "2.5.1",
+      "installed": "2.5.1"
+    },
+    "cloudpickle": {
+      "expected": "3.1.2",
+      "installed": "3.1.2"
+    },
+    "colorama": {
+      "expected": "0.4.6",
+      "installed": "0.4.6"
+    },
+    "contourpy": {
+      "expected": "1.3.3",
+      "installed": "1.3.3"
+    },
+    "cycler": {
+      "expected": "0.12.1",
+      "installed": "0.12.1"
+    },
+    "etils": {
+      "expected": "1.14.0",
+      "installed": "1.14.0"
+    },
+    "Farama-Notifications": {
+      "expected": "0.0.6",
+      "installed": "0.0.6"
+    },
+    "filelock": {
+      "expected": "3.32.3",
+      "installed": "3.32.3"
+    },
+    "fonttools": {
+      "expected": "4.67.0",
+      "installed": "4.67.0"
+    },
+    "fsspec": {
+      "expected": "2026.7.0",
+      "installed": "2026.7.0"
+    },
+    "glfw": {
+      "expected": "2.11.0",
+      "installed": "2.11.0"
+    },
+    "gymnasium": {
+      "expected": "1.4.0",
+      "installed": "1.4.0"
+    },
+    "h5py": {
+      "expected": "3.16.0",
+      "installed": "3.16.0"
+    },
+    "ImageIO": {
+      "expected": "2.38.1",
+      "installed": "2.38.1"
+    },
+    "imageio-ffmpeg": {
+      "expected": "0.6.0",
+      "installed": "0.6.0"
+    },
+    "iniconfig": {
+      "expected": "2.3.1",
+      "installed": "2.3.1"
+    },
+    "Jinja2": {
+      "expected": "3.1.6",
+      "installed": "3.1.6"
+    },
+    "kiwisolver": {
+      "expected": "1.5.1",
+      "installed": "1.5.1"
+    },
+    "MarkupSafe": {
+      "expected": "3.0.3",
+      "installed": "3.0.3"
+    },
+    "matplotlib": {
+      "expected": "3.11.2",
+      "installed": "3.11.2"
+    },
+    "mpmath": {
+      "expected": "1.3.0",
+      "installed": "1.3.0"
+    },
+    "mujoco": {
+      "expected": "3.16.0",
+      "installed": "3.16.0"
+    },
+    "networkx": {
+      "expected": "3.6.1",
+      "installed": "3.6.1"
+    },
+    "numpy": {
+      "expected": "2.4.6",
+      "installed": "2.4.6"
+    },
+    "packaging": {
+      "expected": "26.3",
+      "installed": "26.3"
+    },
+    "pillow": {
+      "expected": "13.0.0",
+      "installed": "13.0.0"
+    },
+    "pip": {
+      "expected": "24.0",
+      "installed": "24.0"
+    },
+    "pluggy": {
+      "expected": "1.7.0",
+      "installed": "1.7.0"
+    },
+    "Pygments": {
+      "expected": "2.21.0",
+      "installed": "2.21.0"
+    },
+    "PyOpenGL": {
+      "expected": "3.1.10",
+      "installed": "3.1.10"
+    },
+    "pyparsing": {
+      "expected": "3.3.3",
+      "installed": "3.3.3"
+    },
+    "pytest": {
+      "expected": "9.1.1",
+      "installed": "9.1.1"
+    },
+    "python-dateutil": {
+      "expected": "2.9.0.post0",
+      "installed": "2.9.0.post0"
+    },
+    "ruff": {
+      "expected": "0.17.1",
+      "installed": "0.17.1"
+    },
+    "setuptools": {
+      "expected": "79.0.1",
+      "installed": "79.0.1"
+    },
+    "six": {
+      "expected": "1.17.0",
+      "installed": "1.17.0"
+    },
+    "stable_baselines3": {
+      "expected": "2.9.0",
+      "installed": "2.9.0"
+    },
+    "sympy": {
+      "expected": "1.14.0",
+      "installed": "1.14.0"
+    },
+    "torch": {
+      "expected": "2.14.1+cpu",
+      "installed": "2.14.1+cpu"
+    },
+    "typing_extensions": {
+      "expected": "4.16.0",
+      "installed": "4.16.0"
+    },
+    "websockets": {
+      "expected": "17.2",
+      "installed": "17.2"
+    },
+    "zipp": {
+      "expected": "4.1.1",
+      "installed": "4.1.1"
+    }
+  }
+}

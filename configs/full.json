@@ -3,6 +3,6 @@
   "seed": 11,
   "demo_episodes": 200,
   "total_steps": 2000000,
-  "dataset": "data/full/demos.h5",
+  "dataset": "data/demos.h5",
   "env": {"max_steps": 400}
 }

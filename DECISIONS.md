@@ -13,6 +13,9 @@ Source specification: `../../docs/superpowers/specs/2026-10-18-project-specifica
 6. Ruling: the controller uses `SeedSequence(episode_seed, spawn_key=(1,))`, separate from the environment's episode-seeded generator. Reusing the same stream produced a measured radius/normal-offset correlation of 1.0. The regression failed before this fix. Uniform offset and Gaussian noise distributions, episode seeds, physics, and all splits stay as specified. Cost if wrong: regenerate demonstrations. Pre-fix artifacts are retained under `artifacts/diagnostics/pre-rng-fix` and are excluded from training and reported smoke evidence.
 7. Ruling: interpolate the raster's surface waypoints at no more than 4 mm before applying the prescribed radial tool-centre formula. Advancing waypoints uses a 1.2 mm target-distance tolerance to accommodate action noise. A single endpoint-height interpolation would cut through a curved cap. Cost if wrong: different scripted coverage; controller discretization is recorded and shared by demonstrations and baseline evaluation.
 8. Ruling: implement the basic seeded evaluator during Task 4 because validation checkpoint selection consumes it. Task 5 adds aggregation, plots, videos, and the unified CLI. Cost if wrong: module ordering only. Validation uses exactly seeds 1000..1019; smoke never reads the final-test suite.
+9. Ruling: the end-to-end smoke command trains seed 11 by default, uses all twenty ID validation cases for checkpoint selection, and checks each evaluation suite on validation seeds 1000..1002. This execution check does not run or relabel the final-test split. Full release validation requires all 3,000 prescribed episodes across methods, suites, and training seeds. Cost if wrong: additional smoke runs; full evaluation remains unchanged.
+10. Ruling: render three actual observed episodes. If the smoke policies produce no success, record that absence in the video manifest and label the replacement video as a timeout or failure. Cost if wrong: the requested success illustration remains unavailable until a policy actually succeeds. No states or outcomes are fabricated.
+11. Ruling: the full config's default dataset is `data/demos.h5`, matching the plan's collect/train command pair. Smoke and pilot remain under their named directories; `--dataset` supports alternate locations. Cost if wrong: pass the intended dataset path explicitly. HDF5 profile and split validation prevents training on a mismatched profile.
 
 ## Pre-flight interface checks
 
@@ -41,7 +44,7 @@ No unresolved pre-implementation blocker. Physics and demonstration quality are 
 - [x] Task 2: environment, coverage, reward, safety, reproducibility, SB3 check. Twenty scripted episodes follow in Task 3.
 - [x] Task 3 software and smoke: scripted demonstrations, HDF5 split, controller quality gate. Full 200-episode collection follows the smoke pipeline.
 - [x] Task 4: BC, PPO, transfer, smoke training, throughput estimate.
-- [ ] Task 5: evaluation, reporting, videos, CLI, clean-install verification.
+- [x] Task 5 software: evaluation, reporting, videos, CLI, clean-install verification. Full trained comparison remains experimental work.
 - [ ] Final whole-repository review and handoff.
 
 ## Experimental status
@@ -61,3 +64,13 @@ Seed-11 smoke training completed for BC, PPO, and BC+PPO under `runs/smoke/{meth
 Measured throughput excluding validation: PPO 506.0400 transitions/s, BC+PPO 444.0391 transitions/s. Full PPO rounds to 2,002,944 transitions per run. Extrapolating three seeds per RL method and 41 validation rounds per run gives about 8.116 hours for six RL runs including validation, before BC fitting, full data collection, final evaluation, and videos. No long run has been launched. Timing is host-specific; the initial test suite ran concurrently with part of the BC smoke stage.
 
 No physical-robot validation.
+
+## 2026-10-19 verification
+
+Task 5: eight new RED tests preceded the aggregation, report, replay-video, and CLI code. The author environment and independently created `.venv-verify` both passed 46 tests. Fresh-environment Ruff passed. Installation used the exact lockfile and editable install without dependency resolution or build isolation. `pip check` found no broken requirements; all 42 exact package pins were compared with installed metadata and matched. Evidence: `reports/smoke/lock-verification.json`.
+
+The clean-environment command `python -m wiping.cli smoke --config configs/smoke.json --output artifacts/smoke/verified-2026-10-19` completed in 151.3429 seconds. It regenerated physics evidence and data, trained all methods, selected checkpoints on twenty validation cases each, and evaluated 36 smoke cases across all methods and suites. It wrote three 401-frame MP4 videos with per-step CSV/plots. The contact-loss video also shows measured contact recovery. No successes or physical-failure terminations occurred in the 36-case smoke evaluation; the other videos are accurately labelled timeouts. This is separate from the safety tests that deliberately trigger physical-failure branches.
+
+Canonical smoke report: `reports/smoke/verified/results.md`. Raw artifacts and source snapshots: `artifacts/smoke/verified-2026-10-19/`. Fresh throughput was 447.3378 transitions/s for PPO and 432.4421 for BC+PPO. Estimated full experiment: 8.6563 hours RL plus validation, 0.2510 hours BC fitting, 0.8159 hours final evaluation, about 161 seconds collection, totaling 9.7678 hours before video rendering. This is a linear extrapolation, not a runtime guarantee. No long training run was launched.
+
+Full 200-episode collection is running at this checkpoint, after the complete smoke pipeline. Final code review remains pending.
