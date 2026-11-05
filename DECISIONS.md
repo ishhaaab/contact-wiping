@@ -94,3 +94,11 @@ Final review: one fresh-context reviewer found two Important issues and one Mino
 Final verification: four intended regression failures were observed before the fixes; the full suite then passed 52/52, and Ruff passed. Targeted post-fix checks passed 14/14. `pip check` passes. The corrected complete smoke command finished in 143.6264 seconds under `artifacts/smoke/final-2026-11-06-complete/`, producing 36 evaluation cases, three learned checkpoints, and three videos including actual contact loss. The prior retry without `-complete` was interrupted by the tool's 120-second limit and is retained, not reported as completed. Latest full estimate: 9.5982 hours before rendering. Canonical committed report: `reports/smoke/final/`.
 
 Final: Ruling: preserve the existing current `main` checkout and commit only this session's implementation corrections; do not switch branches, merge, or push. The repository acquired its current branch/remote outside these implementation actions. Cost if wrong: integration can be decided separately; local work remains recoverable.
+
+## Full experimental release request
+
+The user authorized the full three-seed comparison and final evaluation, plus logging-only diagnostics, a resumable detached worker, and automatic sleep inhibition. No experiment settings were changed. Preflight confirmed the full dataset and its gate; original tests passed 52/52. New passive-logging/launcher tests passed, with the complete pre-launch suite at 56/56 and Ruff clean.
+
+Initial PPO value diagnostics distinguish the first-rollout pre-optimizer return/value MSE from the first optimizer pass's SB3 `train/value_loss`. Transition-zero value loss is undefined because no sampled returns exist yet. Initial log-std is recorded before the first rollout. A seeded paired test verifies the logging leaves every trained parameter tensor exactly unchanged.
+
+The detached worker's Windows execution-state request prevents automatic idle sleep only while it runs. No saved power settings are modified. Explicit sleep, lid closure, shutdown, power loss, and thermal shutdown cannot be prevented or guaranteed against; users must keep the laptop plugged in and lid open. Command failures stop the attempt without retrying or patching. Partial artifacts are retained and explicit resumes use fresh siblings.

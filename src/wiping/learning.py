@@ -152,6 +152,36 @@ class ValidationCallback(BaseCallback):
         self.best_steps = 0
         self.validation_seconds = 0.0
         self.validation_rows, self.episode_rows = [], []
+        self.start_diagnostics = {}
+
+    def _on_training_start(self):
+        self.start_diagnostics = {
+            "initial_transitions": self.model.num_timesteps,
+            "initial_policy_log_std": self.model.policy.log_std.detach().cpu().tolist(),
+            "value_loss_definition": (
+                "pre_update_value_mse is first rollout mean squared return-minus-value before "
+                "optimization; first_optimizer_value_loss is SB3 train/value_loss averaged "
+                "over the first PPO optimization pass. No targets exist at transition zero."
+            ),
+        }
+        write_json(self.output / "ppo_start.json", self.start_diagnostics)
+
+    def _capture_first_optimizer_loss(self):
+        if (self.start_diagnostics and "first_optimizer_value_loss" not in self.start_diagnostics
+                and "train/value_loss" in self.model.logger.name_to_value):
+            self.start_diagnostics["first_optimizer_value_loss"] = float(
+                self.model.logger.name_to_value["train/value_loss"]
+            )
+            self.start_diagnostics["first_optimizer_policy_log_std"] = (
+                self.model.policy.log_std.detach().cpu().tolist()
+            )
+            write_json(self.output / "ppo_start.json", self.start_diagnostics)
+
+    def _on_rollout_start(self):
+        self._capture_first_optimizer_loss()
+
+    def _on_training_end(self):
+        self._capture_first_optimizer_loss()
 
     def validate(self):
         started = perf_counter()
@@ -187,6 +217,13 @@ class ValidationCallback(BaseCallback):
         return True
 
     def _on_rollout_end(self):
+        if "pre_update_value_mse" not in self.start_diagnostics:
+            buffer = self.model.rollout_buffer
+            self.start_diagnostics.update(
+                first_rollout_transitions=self.model.num_timesteps,
+                pre_update_value_mse=float(np.mean((buffer.returns - buffer.values) ** 2)),
+            )
+            write_json(self.output / "ppo_start.json", self.start_diagnostics)
         if self.episode_rows:
             write_csv(self.output / "training_episodes.csv", self.episode_rows)
         if any(not torch.isfinite(p).all() for p in self.model.policy.parameters()):
