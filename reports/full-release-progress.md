@@ -39,7 +39,7 @@ The release-analysis generator is tested using explicitly synthetic temporary fi
 After the worker completes successfully, run:
 
 ```text
-python -m wiping.release_report --control artifacts/full-release-20261106-005111 --output reports/full/analysis
+python -m wiping.release_report --control artifacts/full-release-scheduled-20261106-0322 --output reports/full/analysis
 ```
 
 Then inspect the actual results, update `reports/results.md` and README status, run tests/lint, and commit the final handoff. If the worker fails, stop and report its preserved logs without patching or automatically retrying. On an explicitly authorized resume, use a fresh control directory with `python -m wiping.release --control artifacts/full-release-NEW-ATTEMPT`; completed pairs are checked and skipped, incomplete attempts are retained and use fresh sibling outputs.
@@ -53,5 +53,11 @@ Before restarting, a separate Windows Task Scheduler probe ran for 15 seconds an
 Reverification passed 59 tests and Ruff. BC/11 training and its complete three-suite final evaluation were validated for skipping without inspecting metrics or reselecting checkpoints. The full dataset hash matched again.
 
 The scheduled attempt will use control directory `artifacts/full-release-scheduled-20261106-0322/`, task `OpenCode-contact-wiping-full-20261106-0322`, and new PPO output `runs/full/ppo/11-retry-full-release-scheduled-20261106-0322/`. No training code or configuration changes were made for this restart. It continues the original method/seed protocol and uses fresh directories for incomplete attempts. Successful task registration alone does not prove training is advancing; live PIDs, CPU time, and successive transition records must be checked.
+
+The scheduled worker started at 03:22:30 local time. Live verification at 03:22:50 found worker PID 12048 and actual trainer PID 18048, parent/child command lines pointing at the fresh PPO/11 output, and 19.28125 CPU seconds in the trainer. The scheduler reported Running and the worker confirmed the automatic idle-sleep guard. The new run's `ppo_start.json` records `initial_transitions=0`; it did not load the interrupted checkpoint. Its first progress record is 4096 transitions and the first captured latest record is 12,288. Startup logs explicitly confirm completed BC/11 training and evaluation were skipped.
+
+Evidence receipts: `artifacts/full-release-scheduled-20261106-0322.live-first.json` and `.transitions-first.json`; scheduler action/settings: `artifacts/full-release-scheduled-20261106-0322.task.xml`. These are observations at the stated times, not promises that the process stays alive indefinitely. Unlike the previous status-only answer, future status claims require live-process and recent-progress checks.
+
+Second live verification at 03:23:31 local time confirmed the same worker and trainer remained alive. Trainer CPU increased from 19.28125 to 59.328125 seconds, and logged transitions increased from 12,288 to 24,576. Receipts are `.live-second.json` and `.transitions-second.json` beside the first receipts. A background observer waits on the actual scheduler-owned worker process; losing that observer does not own or terminate the scheduled task. Any unexpected exit must be investigated rather than treated as completion. No claim is made that Task Scheduler can survive logout, shutdown, explicit sleep, or machine failure with continuous compute.
 
 Full results are pending. Do not infer performance from smoke data.
