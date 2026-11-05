@@ -30,7 +30,7 @@ Completed training/evaluation outputs are validated and skipped on explicit resu
 
 Pre-launch verification passed: 56 tests in 32.86 seconds, Ruff, and `pip check`. The logging-invariance test confirms exactly equal trained policy tensors with and without passive diagnostics. Four test-first cases verify incomplete-run handling, non-overwrite paths, fail-stop command logging, and numerical logging invariance. Windows accepted a test automatic-sleep inhibition request, which was then released without changing saved power settings.
 
-The full comparison is launched as detached worker PID 26964, using committed logging/launcher revision `4549118`. Windows confirmed the worker's automatic idle-sleep inhibition request. Control directory: `artifacts/full-release-20261106-005111/`. The outer background waiter has no timeout; its completion or failure wakes this session when available.
+The first comparison attempt launched as detached worker PID 26964 using logging/launcher revision `4549118`, with control directory `artifacts/full-release-20261106-005111/`. It was later found interrupted: neither worker nor training process remained alive, although the JSON status still said running. The final progress row recorded PPO/11 at 1,241,088 transitions, file modification time 2026-11-06 01:57:40 local time. No exit reason or traceback was preserved. Do not interpret those stale status fields as evidence of a live process. The claimed wake-up notification did not occur and must not be relied on as proof of survival.
 
 Progress and per-command elapsed times are recorded in `progress.log` and `state.json` under the control directory. Each train/evaluate/report command has its own log. The detached worker's combined output is `artifacts/full-release-20261106-005111.worker.log`. The initial startup record confirmed the exact README BC/11 command and full-config path. No final-test metrics have been inspected while preparing the reporting code.
 
@@ -43,5 +43,15 @@ python -m wiping.release_report --control artifacts/full-release-20261106-005111
 ```
 
 Then inspect the actual results, update `reports/results.md` and README status, run tests/lint, and commit the final handoff. If the worker fails, stop and report its preserved logs without patching or automatically retrying. On an explicitly authorized resume, use a fresh control directory with `python -m wiping.release --control artifacts/full-release-NEW-ATTEMPT`; completed pairs are checked and skipped, incomplete attempts are retained and use fresh sibling outputs.
+
+## Authorized fresh restart, 2026-11-06
+
+The user approved restarting the interrupted PPO/11 experiment from scratch in a new directory. The original `runs/full/ppo/11/` remains untouched. Its selected checkpoint is not a continuation point: the new experiment must use the original seed and complete budget from transition zero.
+
+Before restarting, a separate Windows Task Scheduler probe ran for 15 seconds and completed with scheduler exit code 0 after its registration shell exited. The probe recorded positive CPU time and a completion receipt under `artifacts/scheduler-probe-20261106-0320.*`. This tests independent scheduling, not immunity to shutdown or explicit sleep. Original process-loss cause remains unknown; Windows event inspection did not establish a causal failure.
+
+Reverification passed 59 tests and Ruff. BC/11 training and its complete three-suite final evaluation were validated for skipping without inspecting metrics or reselecting checkpoints. The full dataset hash matched again.
+
+The scheduled attempt will use control directory `artifacts/full-release-scheduled-20261106-0322/`, task `OpenCode-contact-wiping-full-20261106-0322`, and new PPO output `runs/full/ppo/11-retry-full-release-scheduled-20261106-0322/`. No training code or configuration changes were made for this restart. It continues the original method/seed protocol and uses fresh directories for incomplete attempts. Successful task registration alone does not prove training is advancing; live PIDs, CPU time, and successive transition records must be checked.
 
 Full results are pending. Do not infer performance from smoke data.

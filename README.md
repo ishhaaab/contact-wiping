@@ -89,7 +89,7 @@ Evaluation defaults to all 100 final-test seeds. Use `--split validation` for sm
 
 ## Full experimental release
 
-Read `reports/results.md` and the smoke run's `report/compute-estimate.json` before starting. The measured initial estimate is hours, not minutes. A user-authorized full comparison is running with a detached resumable launcher; its command logs and status are under `artifacts/full-release-20261106-005111/`. This is not yet a completed experimental release.
+Read `reports/results.md` and the smoke run's `report/compute-estimate.json` before starting. The measured estimate is hours, not minutes. The first detached attempt was interrupted; its stale JSON status is not evidence of a live process. The user authorized a fresh PPO/11 restart under Windows Task Scheduler with control directory `artifacts/full-release-scheduled-20261106-0322/`. The original partial run and completed BC/11 pair are preserved. See `reports/full-release-progress.md` for verification and current execution details. This is not yet a completed experimental release.
 
 After collecting `data/demos.h5`, these PowerShell commands run the prescribed comparison:
 
