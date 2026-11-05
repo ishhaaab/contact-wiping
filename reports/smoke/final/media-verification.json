@@ -1,0 +1,38 @@
+[
+  {
+    "path": "artifacts\\smoke\\final-2026-11-06-complete\\videos\\01-timeout-scripted-curvature-1000.mp4",
+    "frames": 401,
+    "shape": [
+      480,
+      640,
+      3
+    ],
+    "requested": "success",
+    "observed": "timeout",
+    "contact_recovery": false
+  },
+  {
+    "path": "artifacts\\smoke\\final-2026-11-06-complete\\videos\\02-contact_loss-scripted-curvature-1001.mp4",
+    "frames": 401,
+    "shape": [
+      480,
+      640,
+      3
+    ],
+    "requested": "contact_loss",
+    "observed": "contact_loss",
+    "contact_recovery": true
+  },
+  {
+    "path": "artifacts\\smoke\\final-2026-11-06-complete\\videos\\03-timeout-scripted-curvature-1002.mp4",
+    "frames": 401,
+    "shape": [
+      480,
+      640,
+      3
+    ],
+    "requested": "physical_failure",
+    "observed": "timeout",
+    "contact_recovery": false
+  }
+]

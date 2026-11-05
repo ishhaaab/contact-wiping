@@ -36,7 +36,7 @@ Command:
 python -m wiping.cli smoke --config configs/smoke.json --output artifacts/smoke/verified-2026-10-19
 ```
 
-Pipeline time was 151.3429 seconds, excluding installation and the preceding tests. It produced three learned checkpoints, 36 paired smoke evaluation episodes, reports, training curves, contact/coverage plots, and three 401-frame MP4s. Quantitative reports include every attempted episode. All 36 evaluations were unsuccessful timeouts; no success illustration was fabricated. One labelled video shows contact loss followed by recovery.
+Pipeline time was 151.3429 seconds, excluding installation and the preceding tests. It produced three learned checkpoints, 36 paired smoke evaluation episodes, reports, training curves, contact/coverage plots, and three 401-frame MP4s. All 36 evaluations were unsuccessful timeouts. The original contact-loss video label is superseded: its force dropped to 0.325 N but never fully unloaded. Do not present it as physical contact loss or recovery.
 
 - [Smoke evaluation table](smoke/verified/results.md)
 - [Raw smoke episodes](smoke/verified/episodes.csv)
@@ -50,4 +50,12 @@ Fresh throughput was 447.3378 transitions/s for PPO and 432.4421 for BC+PPO. The
 
 ## Remaining experimental work
 
-The full 200-episode dataset is being collected after successful smoke verification. Full three-seed training and the prescribed 3,000-case ID/OOD comparison remain unrun. There is no full learning-performance claim, and no physical-robot validation.
+The full dataset completed after successful smoke verification: 200 episodes, 80,000 transitions, exact 160/40 split. Of these, 81% passed the demonstration coverage gate. All episodes timed out, none succeeded, none were discarded. See `full-dataset.json` for checksum and timing.
+
+Full three-seed training and the prescribed 3,000-case ID/OOD comparison remain unrun. No full learning-performance or physical-robot validation claim is made.
+
+## Final corrections, 2026-11-06
+
+Fresh-context review identified simulator-fault priority and mixed evaluation-split reporting defects. Both were reproduced with failing regression tests and corrected. Contact-loss diagnostics now require actual unloading below 1e-4 N for a full control interval, rather than merely falling below useful wiping force. The old video/recovery claim is withdrawn.
+
+Final verification: 52 tests passed in 18.22 seconds; Ruff passed. The first rerun was stopped by the tool's 120-second timeout. Its partial artifacts remain under `artifacts/smoke/final-2026-11-06/`. A new run with a longer tool timeout completed in 143.6264 seconds at `artifacts/smoke/final-2026-11-06-complete/`. All 36 evaluation cases are retained. Three labelled videos include actual contact loss; no success or physical-failure example occurred, so the other two are honestly labelled timeouts. The latest estimate is 9.60 hours before rendering for the full experiment. See `smoke/final/results.md` and `smoke/final/compute-estimate.json`.

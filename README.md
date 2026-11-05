@@ -61,6 +61,8 @@ HDF5 stores one group per episode. Observations have `T+1` rows, actions and mea
 
 ## Smoke pipeline
 
+Latest corrected smoke output: `artifacts/smoke/final-2026-11-06-complete/`. The earlier October contact-loss label is withdrawn; the video showed weak contact, not full unloading. See `reports/results.md`. The complete 200-episode dataset is available at `data/demos.h5` with its SHA256 manifest. Full training remains unrun.
+
 ```text
 python -m wiping.cli smoke --config configs/smoke.json
 ```

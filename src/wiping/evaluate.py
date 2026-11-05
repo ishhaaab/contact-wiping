@@ -29,11 +29,15 @@ def normalize_rows(rows: list[dict]) -> list[dict]:
     if not rows:
         raise ValueError("No evaluation episodes")
     result, identities = [], set()
+    splits = {r.get("evaluation_split", "unspecified") for r in rows}
+    if len(splits) != 1:
+        raise ValueError("Cannot combine evaluation splits in one report")
     for raw in rows:
         missing = REQUIRED_METRICS - raw.keys()
         if missing:
             raise ValueError(f"Missing required metrics: {sorted(missing)}")
         row = dict(raw)
+        row["evaluation_split"] = raw.get("evaluation_split", "unspecified")
         if row["method"] not in ("scripted", "bc", "ppo", "bc_ppo"):
             raise ValueError("Unknown evaluation method")
         if row["suite"] not in ("id", "curvature", "friction"):
@@ -112,12 +116,14 @@ def aggregate(rows: list[dict]) -> dict:
             }
         groups.append({
             "profile": profile, "suite": suite, "method": method,
+            "evaluation_split": cases[0]["evaluation_split"],
             "episodes": len(cases), "paired_case_count": len({r["seed"] for r in cases}),
             "n_training_seeds": 0 if method == "scripted" else len(seeds),
             "training_seeds": [] if method == "scripted" else seeds,
             "per_training_seed": per_model, "metrics": metrics,
         })
     return {"episodes": len(rows), "groups": groups,
+            "evaluation_split": rows[0]["evaluation_split"],
             "notes": ["All episodes, including failures, contribute to coverage and success.",
                       "Force means include non-contact substeps.",
                       "Completion time is conditional on success; null means no successes.",
@@ -156,7 +162,7 @@ def rollout_episode(env: WipingEnv, policy, suite: str, seed: int, on_frame=None
             action, _ = policy.predict(obs, deterministic=True)
         obs, reward, terminated, truncated, info = env.step(action)
         total_reward += reward
-        in_contact = info["force_mean_n"] >= 0.5
+        in_contact = info["force_max_n"] >= 1e-4
         if contact_seen and not in_contact:
             contact_lost = True
         if contact_lost and in_contact:

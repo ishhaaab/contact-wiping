@@ -1,0 +1,38 @@
+[
+  {
+    "file": "artifacts\\smoke\\verified-2026-10-19\\videos\\01-timeout-scripted-curvature-1000.mp4",
+    "frames": 401,
+    "fps": 20.0,
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "bytes": 285073,
+    "sha256": "1ee72a71f612b65bc5d11dfc68e5cc3e1ca772f30cfb420240a2b0044050ec19"
+  },
+  {
+    "file": "artifacts\\smoke\\verified-2026-10-19\\videos\\02-contact_loss-scripted-curvature-1002.mp4",
+    "frames": 401,
+    "fps": 20.0,
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "bytes": 281036,
+    "sha256": "b9e9baa76387ffb82ab8067cf9f6445056c2b0f528a9caf86cbccd3ff3a376fe"
+  },
+  {
+    "file": "artifacts\\smoke\\verified-2026-10-19\\videos\\03-timeout-scripted-id-1000.mp4",
+    "frames": 401,
+    "fps": 20.0,
+    "frame_shape": [
+      480,
+      640,
+      3
+    ],
+    "bytes": 275995,
+    "sha256": "b691dacfc9e7f247573b08eb9af689c815f48d04013bb12600d101b75f4cc2a4"
+  }
+]

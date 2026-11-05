@@ -1,0 +1,40 @@
+{
+  "basis": "Measured smoke/pilot throughput, linear extrapolation; not a runtime promise",
+  "rl_methods": [
+    {
+      "method": "ppo",
+      "measured_transitions_per_second": 482.0352516873437,
+      "training_seeds": 3,
+      "actual_transitions_per_seed": 2002944,
+      "validation_rounds_per_seed": 41,
+      "estimated_seconds_three_seeds": 14275.89305265429
+    },
+    {
+      "method": "bc_ppo",
+      "measured_transitions_per_second": 420.24922030477035,
+      "training_seeds": 3,
+      "actual_transitions_per_seed": 2002944,
+      "validation_rounds_per_seed": 41,
+      "estimated_seconds_three_seeds": 16497.563082901885
+    }
+  ],
+  "estimated_rl_and_validation_hours": 8.548182259876715,
+  "estimated_bc_fitting_hours": 0.2684219288888724,
+  "estimated_final_evaluation_hours": 0.7450218666666236,
+  "estimated_collection_seconds": 131.7084824999256,
+  "estimated_dataset_bytes": 22366075.0,
+  "estimated_total_hours_excluding_rendering": 9.598211745015524,
+  "full_final_evaluation_episodes": 3000,
+  "hardware": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "logical_cpus": 16,
+    "training_device": "cpu",
+    "torch_threads": 1
+  },
+  "limitations": [
+    "Laptop power and thermal limits affect throughput.",
+    "Episode lengths and BC early stopping can change runtime.",
+    "Extrapolation uses only the available completed timing measurements."
+  ]
+}

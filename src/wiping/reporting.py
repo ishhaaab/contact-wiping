@@ -193,6 +193,7 @@ def write_report(inputs: list[Path], output: Path, *, training_root: Path | None
     write_json(output / "summary.json", summary)
     lines = ["# Measured evaluation results", "",
              "All attempted episodes are included. Smoke results only verify execution.", "",
+             f"Evaluation split: `{summary['evaluation_split']}`", "",
              "| Profile | Method | Suite | Train seeds | Episodes | Coverage | Success | Unsafe |",
              "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |"]
     for group in summary["groups"]:

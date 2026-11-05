@@ -118,3 +118,30 @@ def test_report_rejects_empty_input_and_writes_real_metrics(tmp_path):
     assert (output / "summary.json").is_file()
     assert (output / "coverage-force.png").is_file()
     assert "0.5000" in (output / "results.md").read_text()
+
+
+def test_report_rejects_mixed_evaluation_splits():
+    validation = dict(metric_row(seed=1000), evaluation_split="validation")
+    final = dict(metric_row(seed=2000), evaluation_split="test")
+    with pytest.raises(ValueError, match="split"):
+        aggregate([validation, final])
+
+
+def test_weak_contact_is_not_contact_loss(monkeypatch):
+    monkeypatch.setattr("wiping.env.read_normal_force", lambda *_: 0.3)
+    row = evaluate(HoverPolicy(), "id", [1000], config=EnvConfig(max_steps=3))[0]
+    assert not row["contact_loss"]
+
+
+def test_partial_unloading_is_not_contact_loss(monkeypatch):
+    forces = iter([1.0] * 25 + [0.3] * 25 + [1.0] * 25)
+    monkeypatch.setattr("wiping.env.read_normal_force", lambda *_: next(forces))
+    row = evaluate(HoverPolicy(), "id", [1000], config=EnvConfig(max_steps=3))[0]
+    assert not row["contact_loss"] and not row["contact_recovery"]
+
+
+def test_actual_unloading_and_recovery_are_recorded(monkeypatch):
+    forces = iter([1.0] * 25 + [0.0] * 25 + [1.0] * 25)
+    monkeypatch.setattr("wiping.env.read_normal_force", lambda *_: next(forces))
+    row = evaluate(HoverPolicy(), "id", [1000], config=EnvConfig(max_steps=3))[0]
+    assert row["contact_loss"] and row["contact_recovery"]

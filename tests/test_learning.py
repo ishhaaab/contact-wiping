@@ -85,3 +85,31 @@ def test_bc_rejects_nonfinite_demonstrations(tmp_path):
     with pytest.raises(RuntimeError, match="Invalid physics"):
         fit_bc(model, path, tmp_path / "out")
     model.get_env().close()
+
+
+@pytest.mark.parametrize("fault", ["warning", "out_of_bounds"])
+def test_simulator_fault_has_priority_over_excessive_force(monkeypatch, tmp_path, fault):
+    import mujoco
+
+    from wiping.learning import FailFastEnv
+
+    env = WipingEnv(EnvConfig())
+    diagnostic = tmp_path / "fatal.json"
+    wrapper = FailFastEnv(env, diagnostic)
+    wrapper.reset(seed=11)
+    env.excessive_count = 2
+    original_step = mujoco.mj_step
+
+    def step(model, data):
+        original_step(model, data)
+        if fault == "warning":
+            data.warning[0].number = 1
+        else:
+            data.qpos[:] = [0.16, 0, 0]
+
+    monkeypatch.setattr("wiping.env.mujoco.mj_step", step)
+    monkeypatch.setattr("wiping.env.read_normal_force", lambda *_: 16.0)
+    with pytest.raises(RuntimeError, match="Invalid physics"):
+        wrapper.step(np.zeros(3))
+    assert diagnostic.is_file()
+    wrapper.close()

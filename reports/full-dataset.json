@@ -1,0 +1,18 @@
+{
+  "episodes": 200,
+  "transitions": 80000,
+  "qualifying_fraction": 0.81,
+  "mean_coverage": 0.55451171875,
+  "success_fraction": 0.0,
+  "physical_failure_fraction": 0.0,
+  "unsuccessful_fraction": 1.0,
+  "profile": "full_demonstration_collection_only",
+  "train_episodes": 160,
+  "validation_episodes": 40,
+  "dataset": "data\\demos.h5",
+  "manifest": "data\\demos.manifest.json",
+  "sha256": "0ddd2dc0f9346b254c585c5cc1b493a692974a3227a5e828b65798226cebb53a",
+  "bytes": 22204095,
+  "wall_seconds": 135.42270840000128,
+  "training_launched": false
+}

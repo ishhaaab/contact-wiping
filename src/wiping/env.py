@@ -118,7 +118,7 @@ class WipingEnv(gym.Env):
             self.episode_force_max = max(self.episode_force_max, force)
             self.unsafe_substeps += int(force > 8)
             self.excessive_count = self.excessive_count + 1 if force > 15 else 0
-            if self.excessive_count >= 3:
+            if self.excessive_count >= 3 and self.failure_reason is None:
                 self.failure_reason = "excessive_force"
             tool = self.data.geom_xpos[self.tool_geom_id]
             radial = tool - self.sphere_centre

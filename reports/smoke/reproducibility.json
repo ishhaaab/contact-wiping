@@ -1,0 +1,5 @@
+{
+  "independent_smoke_dataset_arrays_exactly_equal": true,
+  "episodes": 8,
+  "bc_initialization_tensors_exactly_equal_across_methods_and_clean_install": true
+}

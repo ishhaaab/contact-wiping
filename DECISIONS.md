@@ -45,7 +45,7 @@ No unresolved pre-implementation blocker. Physics and demonstration quality are 
 - [x] Task 3 software and smoke: scripted demonstrations, HDF5 split, controller quality gate. Full 200-episode collection follows the smoke pipeline.
 - [x] Task 4: BC, PPO, transfer, smoke training, throughput estimate.
 - [x] Task 5 software: evaluation, reporting, videos, CLI, clean-install verification. Full trained comparison remains experimental work.
-- [ ] Final whole-repository review and handoff.
+- [x] Final whole-repository review and handoff. Important findings fixed; one minor deferred.
 
 ## Experimental status
 
@@ -73,4 +73,24 @@ The clean-environment command `python -m wiping.cli smoke --config configs/smoke
 
 Canonical smoke report: `reports/smoke/verified/results.md`. Raw artifacts and source snapshots: `artifacts/smoke/verified-2026-10-19/`. Fresh throughput was 447.3378 transitions/s for PPO and 432.4421 for BC+PPO. Estimated full experiment: 8.6563 hours RL plus validation, 0.2510 hours BC fitting, 0.8159 hours final evaluation, about 161 seconds collection, totaling 9.7678 hours before video rendering. This is a linear extrapolation, not a runtime guarantee. No long training run was launched.
 
-Full 200-episode collection is running at this checkpoint, after the complete smoke pipeline. Final code review remains pending.
+Full 200-episode collection completed: 80,000 transitions, seeds 3000..3199, exact 160/40 episode split, qualifying fraction 0.81, mean final coverage 0.55451171875. All 200 episodes timed out; none succeeded or had a physical-failure termination. Dataset `data/demos.h5`, SHA256 `0ddd2dc0f9346b254c585c5cc1b493a692974a3227a5e828b65798226cebb53a`. Summary: `reports/full-dataset.json`.
+
+## 2026-11-06 final review and corrections
+
+The checkout is now on `main` at the reviewed commit. This session did not switch or rename the branch. The previous virtual environments were absent; `.venv-verify` was recreated from the lockfile. No user changes were reverted.
+
+Final: fixed simulator faults overwritten by excessive-force termination. Warning and out-of-bounds fault-injection regressions failed before the fix. Simulator faults now take precedence, preserving fail-fast diagnostics.
+
+Final: fixed validation/test aggregation. A mixed-split regression failed before the fix. Reports reject mixed evaluation splits and explicitly label their split in JSON and Markdown. Legacy rows without a split remain explicitly `unspecified`.
+
+Final: fixed misleading contact-loss classification. The old 0.5 N threshold detected weak wiping force, not absent contact. A partial-unloading regression failed before correction. Contact loss now requires a full control interval with maximum force below 1e-4 N after prior contact. This corrects an illustrative diagnostic, not physics, observations, actions, reward, algorithms, or evaluation splits. The old 2026-10-19 contact-loss video and recovery claim are superseded. Historical artifacts remain intact for audit.
+
+Final: minor (deferred): the off-axis static-load test is insufficiently steep to reject a world-z-force mutation within its tolerance. Production measurement correctly uses contact-frame force. Stronger mutation coverage is deferred test hardening.
+
+Final: Ruling: retain the algorithms without claiming learning superiority or a full experimental release. Full training, Linux/WSL verification, physical validation, and visual aesthetics were outside the review's measured evidence. Cost if wrong: separate experiments or execution environments are needed, not an optimistic completion claim.
+
+Final review: one fresh-context reviewer found two Important issues and one Minor. Both Important issues and the independently identified diagnostic-label bug enter one regression-tested fix pass. No second reviewer is dispatched. Full training remains unrun.
+
+Final verification: four intended regression failures were observed before the fixes; the full suite then passed 52/52, and Ruff passed. Targeted post-fix checks passed 14/14. `pip check` passes. The corrected complete smoke command finished in 143.6264 seconds under `artifacts/smoke/final-2026-11-06-complete/`, producing 36 evaluation cases, three learned checkpoints, and three videos including actual contact loss. The prior retry without `-complete` was interrupted by the tool's 120-second limit and is retained, not reported as completed. Latest full estimate: 9.5982 hours before rendering. Canonical committed report: `reports/smoke/final/`.
+
+Final: Ruling: preserve the existing current `main` checkout and commit only this session's implementation corrections; do not switch branches, merge, or push. The repository acquired its current branch/remote outside these implementation actions. Cost if wrong: integration can be decided separately; local work remains recoverable.
