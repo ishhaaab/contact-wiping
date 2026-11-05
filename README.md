@@ -61,7 +61,7 @@ HDF5 stores one group per episode. Observations have `T+1` rows, actions and mea
 
 ## Smoke pipeline
 
-Latest corrected smoke output: `artifacts/smoke/final-2026-11-06-complete/`. The earlier October contact-loss label is withdrawn; the video showed weak contact, not full unloading. See `reports/results.md`. The complete 200-episode dataset is available at `data/demos.h5` with its SHA256 manifest. Full training remains unrun.
+Latest corrected smoke output: `artifacts/smoke/final-2026-11-06-complete/`. The earlier October contact-loss label is withdrawn; the video showed weak contact, not full unloading. See `reports/results.md`. The complete 200-episode dataset is available at `data/demos.h5` with its SHA256 manifest. The full experimental comparison is now running; no full results are claimed yet. See `reports/full-release-progress.md`.
 
 ```text
 python -m wiping.cli smoke --config configs/smoke.json
@@ -89,7 +89,7 @@ Evaluation defaults to all 100 final-test seeds. Use `--split validation` for sm
 
 ## Full experimental release
 
-Read `reports/results.md` and the smoke run's `report/compute-estimate.json` before starting. The measured initial estimate is hours, not minutes. Full training has not been run by the implementation agent.
+Read `reports/results.md` and the smoke run's `report/compute-estimate.json` before starting. The measured initial estimate is hours, not minutes. A user-authorized full comparison is running with a detached resumable launcher; its command logs and status are under `artifacts/full-release-20261106-005111/`. This is not yet a completed experimental release.
 
 After collecting `data/demos.h5`, these PowerShell commands run the prescribed comparison:
 

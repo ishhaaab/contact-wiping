@@ -30,4 +30,18 @@ Completed training/evaluation outputs are validated and skipped on explicit resu
 
 Pre-launch verification passed: 56 tests in 32.86 seconds, Ruff, and `pip check`. The logging-invariance test confirms exactly equal trained policy tensors with and without passive diagnostics. Four test-first cases verify incomplete-run handling, non-overwrite paths, fail-stop command logging, and numerical logging invariance. Windows accepted a test automatic-sleep inhibition request, which was then released without changing saved power settings.
 
-Ready to launch. Full results are not yet available. Do not infer performance from smoke data.
+The full comparison is launched as detached worker PID 26964, using committed logging/launcher revision `4549118`. Windows confirmed the worker's automatic idle-sleep inhibition request. Control directory: `artifacts/full-release-20261106-005111/`. The outer background waiter has no timeout; its completion or failure wakes this session when available.
+
+Progress and per-command elapsed times are recorded in `progress.log` and `state.json` under the control directory. Each train/evaluate/report command has its own log. The detached worker's combined output is `artifacts/full-release-20261106-005111.worker.log`. The initial startup record confirmed the exact README BC/11 command and full-config path. No final-test metrics have been inspected while preparing the reporting code.
+
+The release-analysis generator is tested using explicitly synthetic temporary fixtures only. It writes per-suite/per-seed tables, aggregate sample SD, successful completion counts, complete BC histories/early-stop diagnostics, first-PPO value/log-std diagnostics, and six success/coverage/unsafe learning curves. It refuses to generate a full report until the 3,000-case comparison completes and refuses to overwrite an analysis directory.
+
+After the worker completes successfully, run:
+
+```text
+python -m wiping.release_report --control artifacts/full-release-20261106-005111 --output reports/full/analysis
+```
+
+Then inspect the actual results, update `reports/results.md` and README status, run tests/lint, and commit the final handoff. If the worker fails, stop and report its preserved logs without patching or automatically retrying. On an explicitly authorized resume, use a fresh control directory with `python -m wiping.release --control artifacts/full-release-NEW-ATTEMPT`; completed pairs are checked and skipped, incomplete attempts are retained and use fresh sibling outputs.
+
+Full results are pending. Do not infer performance from smoke data.
